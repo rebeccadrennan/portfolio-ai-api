@@ -1,5 +1,9 @@
 # portfolio-ai-api
 
+[![Quality Gate](https://github.com/rebeccadrennan/portfolio-ai-api/actions/workflows/ci.yml/badge.svg)](https://github.com/rebeccadrennan/portfolio-ai-api/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/rebeccadrennan/portfolio-ai-api/actions/workflows/codeql.yml/badge.svg)](https://github.com/rebeccadrennan/portfolio-ai-api/actions/workflows/codeql.yml)
+[![Dependabot](https://img.shields.io/badge/dependabot-enabled-025E8C?logo=dependabot)](https://github.com/rebeccadrennan/portfolio-ai-api/security/dependabot)
+
 A production-style Python FastAPI backend that powers Rebecca Drennan's AI Portfolio Assistant.
 
 This API is designed to support a React portfolio website where visitors can ask questions about Rebecca's background. The assistant uses Google Gemini with a public-safe markdown knowledge base.
@@ -76,7 +80,13 @@ portfolio-ai-api/
 
 ## Quality and CI
 
-- A GitHub Actions workflow runs tests on every push and pull request to `main`.
+- `Quality Gate` workflow runs on push/PR with:
+  - Ruff linting,
+  - Black formatting checks,
+  - test matrix on Python 3.11 and 3.12,
+  - dependency vulnerability scanning via `pip-audit`.
+- `CodeQL` workflow performs static security analysis for Python.
+- Dependabot is configured for weekly updates for both pip dependencies and GitHub Actions.
 - Local test command:
 
 ```bash
