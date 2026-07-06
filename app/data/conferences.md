@@ -1,0 +1,1 @@
+Rebecca enjoys attending hackathons, AI events, women in technology events, machine learning workshops and software engineering conferences. She enjoys networking, learning from others and exploring innovative technical ideas.
