@@ -1,18 +1,20 @@
 # portfolio-ai-api
 
-[![Quality Gate](https://github.com/rebeccadrennan/portfolio-ai-api/actions/workflows/ci.yml/badge.svg)](https://github.com/rebeccadrennan/portfolio-ai-api/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/rebeccadrennan/portfolio-ai-api/actions/workflows/codeql.yml/badge.svg)](https://github.com/rebeccadrennan/portfolio-ai-api/actions/workflows/codeql.yml)
-[![Dependabot](https://img.shields.io/badge/dependabot-enabled-025E8C?logo=dependabot)](https://github.com/rebeccadrennan/portfolio-ai-api/security/dependabot)
-
 A production-style Python FastAPI backend that powers Rebecca Drennan's AI Portfolio Assistant.
 
-This API is designed to support a React portfolio website where recruiters can ask questions about Rebecca's background. The assistant uses Google Gemini with a public-safe markdown knowledge base.
+This API is designed to support a React portfolio website where visitors can ask questions about Rebecca's background. The assistant uses Google Gemini with a public-safe markdown knowledge base.
+
+## Demo
+
+Swagger UI walkthrough (health check + chat request):
+
+![Swagger UI Demo](docs/assets/SwaggerUI.gif)
 
 ## What This Project Powers
 
 This backend powers Rebecca's AI Portfolio Assistant experience by:
 
-- receiving recruiter questions from a frontend chat UI,
+- receiving portfolio questions from a frontend chat UI,
 - loading portfolio context from local files,
 - redacting sensitive contact details,
 - sending grounded prompts to Gemini,
@@ -35,6 +37,11 @@ This backend powers Rebecca's AI Portfolio Assistant experience by:
 ```text
 portfolio-ai-api/
   .github/
+    ISSUE_TEMPLATE/
+      bug_report.md
+      feature_request.md
+      config.yml
+    pull_request_template.md
     workflows/
       ci.yml
   app/
@@ -57,21 +64,19 @@ portfolio-ai-api/
     test_imports.py
   .env.example
   .gitignore
+  .editorconfig
+  CODE_OF_CONDUCT.md
   CONTRIBUTING.md
+  LICENSE
   pyproject.toml
   requirements.txt
   README.md
+  SECURITY.md
 ```
 
 ## Quality and CI
 
-- `Quality Gate` workflow runs on push/PR with:
-  - Ruff linting,
-  - Black formatting checks,
-  - test matrix on Python 3.11 and 3.12,
-  - dependency vulnerability scanning via `pip-audit`.
-- `CodeQL` workflow performs static security analysis for Python.
-- Dependabot is configured for weekly updates for both pip dependencies and GitHub Actions.
+- A GitHub Actions workflow runs tests on every push and pull request to `main`.
 - Local test command:
 
 ```bash
@@ -79,6 +84,15 @@ python -m pytest -q
 ```
 
 - Contributor guidelines are in `CONTRIBUTING.md`.
+
+## Repository Standards
+
+- License: MIT in `LICENSE`.
+- Code of conduct: `CODE_OF_CONDUCT.md`.
+- Security disclosure guidance: `SECURITY.md`.
+- Issue templates: `.github/ISSUE_TEMPLATE/`.
+- Pull request template: `.github/pull_request_template.md`.
+- Editor consistency settings: `.editorconfig`.
 
 ## Local Setup
 
