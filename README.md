@@ -6,13 +6,19 @@
 
 A production-style Python FastAPI backend that powers Rebecca Drennan's AI Portfolio Assistant.
 
-This API is designed to support a React portfolio website where recruiters can ask questions about Rebecca's background. The assistant uses Google Gemini with a public-safe markdown knowledge base.
+This API is designed to support a React portfolio website where visitors can ask questions about Rebecca's background. The assistant uses Google Gemini with a public-safe markdown knowledge base.
+
+## Demo
+
+Swagger UI walkthrough (health check + chat request):
+
+![Swagger UI Demo](docs/assets/SwaggerUI.gif)
 
 ## What This Project Powers
 
 This backend powers Rebecca's AI Portfolio Assistant experience by:
 
-- receiving recruiter questions from a frontend chat UI,
+- receiving portfolio questions from a frontend chat UI,
 - loading portfolio context from local files,
 - redacting sensitive contact details,
 - sending grounded prompts to Gemini,
@@ -35,6 +41,11 @@ This backend powers Rebecca's AI Portfolio Assistant experience by:
 ```text
 portfolio-ai-api/
   .github/
+    ISSUE_TEMPLATE/
+      bug_report.md
+      feature_request.md
+      config.yml
+    pull_request_template.md
     workflows/
       ci.yml
   app/
@@ -57,10 +68,14 @@ portfolio-ai-api/
     test_imports.py
   .env.example
   .gitignore
+  .editorconfig
+  CODE_OF_CONDUCT.md
   CONTRIBUTING.md
+  LICENSE
   pyproject.toml
   requirements.txt
   README.md
+  SECURITY.md
 ```
 
 ## Quality and CI
@@ -79,6 +94,15 @@ python -m pytest -q
 ```
 
 - Contributor guidelines are in `CONTRIBUTING.md`.
+
+## Repository Standards
+
+- License: MIT in `LICENSE`.
+- Code of conduct: `CODE_OF_CONDUCT.md`.
+- Security disclosure guidance: `SECURITY.md`.
+- Issue templates: `.github/ISSUE_TEMPLATE/`.
+- Pull request template: `.github/pull_request_template.md`.
+- Editor consistency settings: `.editorconfig`.
 
 ## Local Setup
 
