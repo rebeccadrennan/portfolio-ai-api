@@ -1,5 +1,9 @@
 # portfolio-ai-api
 
+[![Quality Gate](https://github.com/rebeccadrennan/portfolio-ai-api/actions/workflows/ci.yml/badge.svg)](https://github.com/rebeccadrennan/portfolio-ai-api/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/rebeccadrennan/portfolio-ai-api/actions/workflows/codeql.yml/badge.svg)](https://github.com/rebeccadrennan/portfolio-ai-api/actions/workflows/codeql.yml)
+[![Dependabot](https://img.shields.io/badge/dependabot-enabled-025E8C?logo=dependabot)](https://github.com/rebeccadrennan/portfolio-ai-api/security/dependabot)
+
 A production-style Python FastAPI backend that powers Rebecca Drennan's AI Portfolio Assistant.
 
 This API is designed to support a React portfolio website where recruiters can ask questions about Rebecca's background. The assistant uses Google Gemini with a public-safe markdown knowledge base.
@@ -7,6 +11,7 @@ This API is designed to support a React portfolio website where recruiters can a
 ## What This Project Powers
 
 This backend powers Rebecca's AI Portfolio Assistant experience by:
+
 - receiving recruiter questions from a frontend chat UI,
 - loading portfolio context from local files,
 - redacting sensitive contact details,
@@ -60,7 +65,13 @@ portfolio-ai-api/
 
 ## Quality and CI
 
-- A GitHub Actions workflow runs tests on every push and pull request to `main`.
+- `Quality Gate` workflow runs on push/PR with:
+  - Ruff linting,
+  - Black formatting checks,
+  - test matrix on Python 3.11 and 3.12,
+  - dependency vulnerability scanning via `pip-audit`.
+- `CodeQL` workflow performs static security analysis for Python.
+- Dependabot is configured for weekly updates for both pip dependencies and GitHub Actions.
 - Local test command:
 
 ```bash
@@ -74,35 +85,41 @@ python -m pytest -q
 1. Create and activate a virtual environment.
 
 Windows Command Prompt (`cmd`):
+
 ```bat
 py -m venv .venv
 .venv\Scripts\activate.bat
 ```
 
 Windows PowerShell:
+
 ```powershell
 py -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
 If PowerShell blocks activation, run:
+
 ```powershell
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 .\.venv\Scripts\Activate.ps1
 ```
 
 2. Install dependencies:
+
 ```bash
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
 
 3. Create your environment file from the example:
+
 ```bash
 copy .env.example .env
 ```
 
 4. Add your Gemini API key in `.env`:
+
 ```env
 GEMINI_API_KEY=your_real_api_key_here
 ```
@@ -119,25 +136,30 @@ Never commit your real API key. This repository ignores `.env` by default.
 ## Knowledge Base
 
 Production knowledge source:
+
 - Markdown files in `app/data/` (including nested folders) are the primary public production knowledge base.
 
 Optional local development source:
+
 - `app/data/LinkedinExport.pdf` can be used locally as an additional context source.
 - `app/data/LinkedinExport.pdf` is gitignored and should not be committed.
 
 How to extend knowledge safely:
+
 - Add new knowledge by creating additional `.md` files in `app/data/`.
 - The assistant only answers from the loaded context.
 - Never add sensitive/private details to public markdown files.
 - Never include confidential employer, client, or internal project details.
 
 Important:
+
 - The backend does not scrape LinkedIn.
 - Any LinkedIn export PDF must be provided manually for local use only.
 
 ## How Knowledge Extraction Works
 
 `knowledge_service.py`:
+
 - recursively reads all `.md` files in `app/data/` and treats them as the main source,
 - optionally reads `app/data/LinkedinExport.pdf` with `pypdf` for local development,
 - combines loaded content into a single context string,
@@ -148,6 +170,7 @@ Important:
 ## Sensitive Data Protection
 
 Before sending context to Gemini, the backend redacts:
+
 - email addresses,
 - UK mobile-style phone numbers,
 - likely home address lines (including postcode/address-like patterns).
@@ -161,6 +184,7 @@ python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 API will be available at:
+
 - `http://localhost:8000`
 - Docs: `http://localhost:8000/docs`
 
@@ -208,6 +232,7 @@ curl -X POST "http://localhost:8000/chat" \
 Your React app can call this API from `http://localhost:5173` or `http://localhost:3000` (both are enabled in CORS).
 
 Typical frontend flow:
+
 1. collect user input from chat UI,
 2. `POST` to `/chat` with `{ "message": "..." }`,
 3. display `reply` in the conversation thread.
@@ -219,6 +244,7 @@ python -m pytest -q
 ```
 
 Current tests validate that:
+
 - FastAPI app imports correctly,
 - knowledge service imports correctly,
 - Gemini service imports correctly.
