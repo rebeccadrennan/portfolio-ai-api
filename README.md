@@ -4,6 +4,12 @@ A production-style Python FastAPI backend that powers Rebecca Drennan's AI Portf
 
 This API is designed to support a React portfolio website where visitors can ask questions about Rebecca's background. The assistant uses Google Gemini with a public-safe markdown knowledge base.
 
+## Demo
+
+Swagger UI walkthrough (health check + chat request):
+
+![Swagger UI Demo](docs/assets/SwaggerUI.gif)
+
 ## What This Project Powers
 
 This backend powers Rebecca's AI Portfolio Assistant experience by:
