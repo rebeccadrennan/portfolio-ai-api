@@ -1,0 +1,2 @@
+Project: AI Portfolio Assistant
+Rebecca built an AI-powered portfolio assistant using React, Python FastAPI and Google Gemini. The assistant helps recruiters ask questions about her skills, education, experience and projects. The backend uses a markdown knowledge base, secure environment variables and prompt rules to avoid exposing private or confidential information. This project demonstrates LLM integration, API design, prompt engineering, full-stack architecture and user-focused AI design.
