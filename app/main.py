@@ -9,6 +9,8 @@ app = FastAPI(title="Rebecca Drennan Portfolio AI API", version="1.0.0")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        "https://www.rebeccadrennan.co.uk",
+        "https://rebeccadrennan.co.uk",
         "http://localhost:5173",
         "http://localhost:3000",
     ],
