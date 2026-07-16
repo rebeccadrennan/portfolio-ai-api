@@ -1,10 +1,24 @@
 from typing import Annotated
 
 from fastapi import FastAPI, File, HTTPException, UploadFile
+from typing import Annotated
+
+from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import Response
 from fastapi.responses import Response
 
 from app.models.chat import ChatRequest, ChatResponse
+from app.models.voice import SpeechToTextResponse, TextToSpeechRequest
+from app.services.elevenlabs_service import (
+    MAX_TTS_TEXT_LENGTH,
+    SUPPORTED_AUDIO_TYPES,
+    ElevenLabsConfigurationError,
+    ElevenLabsService,
+    ElevenLabsTimeoutError,
+    ElevenLabsUpstreamError,
+    ElevenLabsValidationError,
+)
 from app.models.voice import SpeechToTextResponse, TextToSpeechRequest
 from app.services.elevenlabs_service import (
     MAX_TTS_TEXT_LENGTH,
@@ -33,6 +47,7 @@ app.add_middleware(
 )
 
 chat_service = GeminiService()
+voice_service = ElevenLabsService()
 voice_service = ElevenLabsService()
 
 
