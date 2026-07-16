@@ -19,12 +19,14 @@ from app.services.gemini_service import GeminiService, GeminiServiceError
 
 app = FastAPI(title="Rebecca Drennan Portfolio AI API", version="1.0.0")
 
+allowed_origins = [
+    "http://localhost:5173",
+    "https://www.rebeccadrennan.co.uk",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://localhost:3000",
-    ],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -102,7 +104,19 @@ async def speech_to_text(
     return SpeechToTextResponse(text=text)
 
 
-@app.post("/text-to-speech")
+@app.post(
+    "/text-to-speech",
+    response_class=Response,
+    responses={
+        200: {
+            "content": {
+                "audio/mpeg": {},
+                "audio/mp3": {},
+            },
+            "description": "Audio response generated from the provided text.",
+        }
+    },
+)
 async def text_to_speech(request: TextToSpeechRequest) -> Response:
     text = request.text.strip()
     if not text:
