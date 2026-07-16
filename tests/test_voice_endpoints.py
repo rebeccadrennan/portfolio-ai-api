@@ -7,7 +7,6 @@ from fastapi.testclient import TestClient
 from app.main import app, voice_service
 from app.services.elevenlabs_service import ElevenLabsService
 
-
 client = TestClient(app)
 
 

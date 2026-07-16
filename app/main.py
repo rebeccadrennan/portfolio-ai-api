@@ -1,3 +1,5 @@
+from typing import Annotated
+
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import Response
@@ -69,7 +71,9 @@ def _raise_voice_http_error(exc: Exception) -> None:
 
 
 @app.post("/speech-to-text", response_model=SpeechToTextResponse)
-async def speech_to_text(audio: UploadFile | None = File(default=None)) -> SpeechToTextResponse:
+async def speech_to_text(
+    audio: Annotated[UploadFile | None, File()] = None,
+) -> SpeechToTextResponse:
     if audio is None:
         raise HTTPException(
             status_code=400, detail="Please attach an audio file in the 'audio' field."
