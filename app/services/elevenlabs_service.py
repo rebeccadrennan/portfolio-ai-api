@@ -91,7 +91,9 @@ class ElevenLabsService:
 
         text = response.json().get("text")
         if not isinstance(text, str) or not text.strip():
-            raise ElevenLabsUpstreamError("Speech-to-text returned an invalid transcription payload.")
+            raise ElevenLabsUpstreamError(
+                "Speech-to-text returned an invalid transcription payload."
+            )
 
         return text.strip()
 

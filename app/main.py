@@ -71,7 +71,9 @@ def _raise_voice_http_error(exc: Exception) -> None:
 @app.post("/speech-to-text", response_model=SpeechToTextResponse)
 async def speech_to_text(audio: UploadFile | None = File(default=None)) -> SpeechToTextResponse:
     if audio is None:
-        raise HTTPException(status_code=400, detail="Please attach an audio file in the 'audio' field.")
+        raise HTTPException(
+            status_code=400, detail="Please attach an audio file in the 'audio' field."
+        )
 
     content_type = (audio.content_type or "").split(";", 1)[0].strip().lower()
     if content_type not in SUPPORTED_AUDIO_TYPES:
@@ -100,7 +102,9 @@ async def speech_to_text(audio: UploadFile | None = File(default=None)) -> Speec
 async def text_to_speech(request: TextToSpeechRequest) -> Response:
     text = request.text.strip()
     if not text:
-        raise HTTPException(status_code=400, detail="Please provide non-empty text in the 'text' field.")
+        raise HTTPException(
+            status_code=400, detail="Please provide non-empty text in the 'text' field."
+        )
     if len(text) > MAX_TTS_TEXT_LENGTH:
         raise HTTPException(
             status_code=400,

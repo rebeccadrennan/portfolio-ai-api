@@ -12,7 +12,9 @@ client = TestClient(app)
 
 
 class FakeAsyncClient:
-    def __init__(self, *, response: httpx.Response | None = None, error: Exception | None = None) -> None:
+    def __init__(
+        self, *, response: httpx.Response | None = None, error: Exception | None = None
+    ) -> None:
         self.response = response
         self.error = error
         self.calls: list[dict[str, object]] = []

@@ -9,12 +9,8 @@ DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 PDF_FILE = DATA_DIR / "LinkedinExport.pdf"
 
 _EMAIL_PATTERN = re.compile(r"\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}\b")
-_UK_PHONE_PATTERN = re.compile(
-    r"\b(?:\+44\s?7\d{3}|(?:\(?0\)?\s?)7\d{3})\s?\d{3}\s?\d{3}\b"
-)
-_UK_POSTCODE_PATTERN = re.compile(
-    r"\b[A-Z]{1,2}\d[A-Z\d]?\s?\d[A-Z]{2}\b", re.IGNORECASE
-)
+_UK_PHONE_PATTERN = re.compile(r"\b(?:\+44\s?7\d{3}|(?:\(?0\)?\s?)7\d{3})\s?\d{3}\s?\d{3}\b")
+_UK_POSTCODE_PATTERN = re.compile(r"\b[A-Z]{1,2}\d[A-Z\d]?\s?\d[A-Z]{2}\b", re.IGNORECASE)
 _ADDRESS_HINTS = (
     "street",
     "st.",
@@ -79,13 +75,10 @@ def _redact_address_like_lines(text: str) -> str:
         stripped = line.strip()
         lowered = stripped.lower()
 
-        looks_like_address = (
-            bool(_UK_POSTCODE_PATTERN.search(stripped))
-            or (
-                any(hint in lowered for hint in _ADDRESS_HINTS)
-                and bool(re.search(r"\d", stripped))
-                and len(stripped) <= 140
-            )
+        looks_like_address = bool(_UK_POSTCODE_PATTERN.search(stripped)) or (
+            any(hint in lowered for hint in _ADDRESS_HINTS)
+            and bool(re.search(r"\d", stripped))
+            and len(stripped) <= 140
         )
 
         if looks_like_address:
