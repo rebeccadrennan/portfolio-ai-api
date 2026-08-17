@@ -7,4 +7,4 @@ pydantic
 pytest
 httpx
 python-multipart
-setuptools>=83.0.0
+setuptools>=84.0.0
